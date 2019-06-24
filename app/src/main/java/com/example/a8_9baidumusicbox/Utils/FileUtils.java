@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,8 @@ public class FileUtils {
     private static String TAG = "FileUtils";
     //用于显示播放列表的数据源
     private List<Map<String, Object>> musicList;
+
+
 
     /**
      * 找当前目录下的音乐文件
@@ -44,7 +47,6 @@ public class FileUtils {
         } else {
             musicList = new ArrayList<Map<String, Object>>();
         }
-
         Log.i(TAG, "refeshMusicList: " + musicList);
         return musicList;
     }

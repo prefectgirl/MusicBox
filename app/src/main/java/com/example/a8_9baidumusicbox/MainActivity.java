@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -45,6 +46,7 @@ public class MainActivity extends Activity {
         star = findViewById(R.id.star);
         backpic = findViewById(R.id.backpic);
         musicName = findViewById(R.id.musicName);
+
         animationUtils = new AnimationUtils(this);
         initDataSetting();
         animationUtils.glideLoadingPic(backpic);
@@ -57,6 +59,21 @@ public class MainActivity extends Activity {
         // 在Activity销毁的时候 取消绑定服务
         unbindService(conn);
         super.onDestroy();
+    }
+
+    /**
+     * 按返回键退出时不销毁activity
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            moveTaskToBack(true);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void initDataSetting() {
@@ -84,8 +101,9 @@ public class MainActivity extends Activity {
     }
 
     public void clickReplay(View view) {
-        iservice.callrePlayMusic();
-        animationUtils.AnimationStar(star, backpic);
+           iservice.callrePlayMusic();
+           animationUtils.AnimationStar(star, backpic);
+
     }
 
     public void clickNextMusic(View view) {

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.a8_9baidumusicbox.R;
 
-public class AnimationUtils  {
+public class AnimationUtils {
     private Animation scaleAnimation;
     private Animation rotateAnimation;
     private Animation backgroundRotateAnimation;
@@ -46,12 +46,15 @@ public class AnimationUtils  {
 
     /**
      * 开始动画
+     *
      * @param image1 上层星星圆，不会动
      * @param image2 下层旋转的专辑图片
      */
     public void AnimationStar(ImageView image1, ImageView image2) {
+        if (backgroundRotateAnimation != null) {
 //        image1.startAnimation(animationSet);
-        image2.startAnimation(backgroundRotateAnimation);
+            image2.startAnimation(backgroundRotateAnimation);
+        }
     }
 
     /**

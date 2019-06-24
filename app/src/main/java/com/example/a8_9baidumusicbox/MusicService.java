@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.a8_9baidumusicbox.Utils.FileUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import java.util.Map;
 public class MusicService extends Service {
     private static String TAG = "MusicService";
     private MediaPlayer mediaPlayer = new MediaPlayer();
+    ;
     private int currIndex = 0;
     private FileUtils fileUtils;
     private List<Map<String, Object>> musiclist;  //用于显示播放列表的数据源
@@ -41,6 +43,7 @@ public class MusicService extends Service {
         super.onCreate();
         init();
     }
+
     public void init() {
         currIndex = 0;
         fileUtils = new FileUtils();
@@ -58,7 +61,7 @@ public class MusicService extends Service {
     }
 
     public String playMusic(int musicPo) {
-        if (musiclist.size() > 0) {
+        if (musiclist.size() > 0 && mediaPlayer != null) {
             System.out.print("音乐播放了");
 //        Toast.makeText(this, "音乐播放了", Toast.LENGTH_LONG).show();
             Map<String, Object> currMusic = musiclist.get(musicPo);
@@ -80,7 +83,7 @@ public class MusicService extends Service {
     }
 
     public void pauseMusic() {
-        if (musiclist.size() > 0) {
+        if (musiclist.size() > 0 && mediaPlayer != null) {
             System.out.print("音乐停止播放");
 //        Toast.makeText(this, "音乐停止播放", Toast.LENGTH_LONG).show();
             mediaPlayer.pause();
@@ -88,7 +91,7 @@ public class MusicService extends Service {
     }
 
     public void replayMusic() {
-        if (musiclist.size() > 0) {
+        if (musiclist.size() > 0 && mediaPlayer != null) {
             System.out.print("音乐继续播放了");
 //        Toast.makeText(this, "音乐继续播放了", Toast.LENGTH_LONG).show();
             mediaPlayer.start();
@@ -98,6 +101,7 @@ public class MusicService extends Service {
     public String playNextMusic() {
         if (musiclist.size() > 0) {
             System.out.print("播放下一首音乐");
+//            mediaPlayer.reset();
 //        Toast.makeText(this, "播放下一首音乐", Toast.LENGTH_LONG).show();
             if (currIndex < musiclist.size() - 1) {
                 currIndex += 1;
@@ -122,6 +126,7 @@ public class MusicService extends Service {
     public String playPreMusic() {
         if (musiclist.size() > 0) {
             System.out.print("播放上一首音乐");
+//            mediaPlayer.reset();
 //        Toast.makeText(this, "播放上一首音乐", Toast.LENGTH_LONG).show();
             if (currIndex > 0) {
                 currIndex -= 1;
